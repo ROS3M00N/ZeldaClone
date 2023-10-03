@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class player extends Rectangle {
-	public int spd = 2;
+	public int spd = 3;
 	public boolean right, left, up, down;
 	
 	//Animations

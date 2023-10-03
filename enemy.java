@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 //pos 1: x139 y209
@@ -25,13 +26,32 @@ public class enemy extends Rectangle {
 	public enemy(int x, int y) {
 		super(x ,y, 32, 32);
 	}
+	
+	//Enemy AI
+	public void hunt() {
+		player p = game.Player;
+		if(x < p.x && world.isFree(x+spd, y)) {
+			if(new Random().nextInt(100)<50)
+			x+=spd;
+		}
+		else if(x > p.x && world.isFree(x-spd, y)) {
+			if(new Random().nextInt(100)<50)
+			x-=spd;
+		}
+		if(y < p.y && world.isFree(x, y+spd)) {
+			if(new Random().nextInt(100)<50)
+			y+=spd;
+		}
+		else if(y > p.y && world.isFree(x, y-spd)) {
+			if(new Random().nextInt(100)<50)
+			y-=spd;
+		}
+	}
 
 	//Frame to frame
 	public void tick() {
 		boolean moved = true;
-		if(right == 1 && world.isFree(x+1, y)) {
-			x++;
-		}
+		hunt();
 		
 		if(moved) {
 		curFrames++;
@@ -54,7 +74,7 @@ public class enemy extends Rectangle {
 		}
 	}
 	
-	//Player renderer
+	//Enemy renderer
 	public void render(Graphics g) {
 		g.drawImage(Spritesheet.enemy_front[curAnimation],x,y,32,32,null);
 		
