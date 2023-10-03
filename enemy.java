@@ -46,7 +46,17 @@ public class enemy extends Rectangle {
 			if(new Random().nextInt(100)<50)
 			y-=spd;
 		}
+		if(x > p.x) {
+			if(new Random().nextInt(100)<25) {
+					shoot = true;
+		}
+		else if(y > p.y) {
+			if(new Random().nextInt(100)<25) {
+					shoot = true;
+			}
+		}
 	}
+}
 
 	//Frame to frame
 	public void tick() {
